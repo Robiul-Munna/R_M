@@ -1,40 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).
 
-## Getting Started
+# AI QA Tool for Healthcare Applications
 
-First, run the development server:
+## Features
+- Natural Language Test Mode
+- Coding Mode Editor (Playwright)
+- Chatbot Assistant (Hugging Face API)
+- Defect Logging (Jira integration ready)
+- Test Case Management (TestRail integration ready)
+- Demo Hospital Workflow Pages
+- Sidebar Navigation
+- Sample Data Seeding
+- Reporting (charts, PDF export)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+## Usage Instructions
+
+### 1. Install & Run Locally
+```sh
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Natural Language Test Mode
+- Go to **Test Cases** (/cases)
+- Enter a plain English test description
+- Click **Generate Test Steps**
+- View AI-generated steps and Playwright code
+- Save as TestRail test case (simulated)
 
-You can start editing the page by modifying `app/route.ts`. The page auto-updates as you edit the file.
+### 3. Coding Mode Editor
+- Go to **Runs** (/runs)
+- Write or paste Playwright test code
+- Click **Run Playwright Test**
+- View results, log defects to Jira (simulated), save to TestRail
 
-## Learn More
+### 4. Chatbot Assistant
+- Click **Open Chatbot** (bottom-right)
+- Ask QA questions, generate tests, get edge cases, log defects
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Defect Logging
+- Go to **Defects** (/defects)
+- Submit defect details, severity, and steps
+- Simulates Jira issue creation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 6. Demo Hospital Workflow
+- Use sidebar to access demo pages:
+	- Login, Patient Search, Medication Order, Document Upload, Scheduling
+- Test end-to-end QA scenarios
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 7. Reporting
+- Go to **Reports** (/reports)
+- View summary charts, pass/fail stats, defect lists
+- Export PDF report
 
-## Deploy on Vercel
+### 8. Sample Data Seeding
+- Demo data is auto-seeded via `/scripts/seedDemoData.ts`
+- For custom data, edit the script or use IndexedDB/localStorage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment (Vercel + GitHub)
+1. Push your code to a GitHub repository
+2. Go to [vercel.com](https://vercel.com) and sign up (free tier)
+3. Import your GitHub repo in Vercel
+4. Set environment variables in Vercel dashboard (e.g., HF_API_KEY)
+5. Click **Deploy**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Advanced & Future Enhancements
+- Multi-user support (add authentication)
+- More charts and metrics in Reports
+- Advanced AI suggestions (custom prompts, more models)
+- Real Jira/TestRail API integration (add credentials in `/lib/jira.ts` and `/lib/testrail.ts`)
+- Accessibility improvements (WCAG compliance)
 
-## API Routes
+## Troubleshooting
+- If Playwright runner fails, check Node.js and Playwright install
+- For API errors, verify environment variables
+- For UI issues, check browser console for errors
 
-This directory contains example API routes for the headless API app.
+## Security & Privacy
+- No PHI/PII stored
+- All demo data is mock and deterministic
+- Only free APIs and open-source tools used
 
-For more details, see [route.js file convention](https://nextjs.org/docs/app/api-reference/file-conventions/route).
+---
+
+For questions or feedback, use the Welcome Popup or contact the project maintainer.
