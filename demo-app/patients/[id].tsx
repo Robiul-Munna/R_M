@@ -24,9 +24,10 @@ export default function PatientProfilePage() {
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow">
-      {/* Welcome note at the top */}
+      {/* Updated welcome note at the top */}
       <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded text-blue-900 text-center">
-        Welcome, Mr. Robiul Munna! Here is the patient chart overview.
+        Feel free to explore and look around. If you have any suggestions, please leave a note — it would be greatly appreciated.<br /><br />
+        Mr. Robiul Munna is currently busy with another task. I’m his AI assistant, and if you work with me, I’ll do my best to help you get your task done.
       </div>
       <h1 className="text-2xl font-bold mb-4">Patient Chart</h1>
       <div className="mb-2">
