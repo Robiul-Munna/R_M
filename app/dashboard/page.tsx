@@ -4,8 +4,40 @@ import WelcomePopup from "@/components/WelcomePopup";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import { Button } from "@/components/ui/button";
 import { UserIcon, BellIcon } from '@heroicons/react/24/outline';
+import { useEffect, useState } from "react";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
+
+const sampleMetrics = {
+  testCases: 120,
+  defectsOpen: 5,
+  defectsClosed: 15,
+  testRunsPass: 110,
+  testRunsFail: 10,
+};
+
+const testRunData = [
+  { name: "Mon", pass: 20, fail: 2 },
+  { name: "Tue", pass: 18, fail: 1 },
+  { name: "Wed", pass: 22, fail: 3 },
+  { name: "Thu", pass: 25, fail: 2 },
+  { name: "Fri", pass: 25, fail: 2 },
+];
+
+const defectTrendData = [
+  { name: "Week 1", open: 8, closed: 2 },
+  { name: "Week 2", open: 5, closed: 5 },
+  { name: "Week 3", open: 3, closed: 7 },
+  { name: "Week 4", open: 2, closed: 10 },
+];
 
 export default function DashboardPage() {
+  const [metrics, setMetrics] = useState(sampleMetrics);
+
+  // Animate counters (simple demo)
+  useEffect(() => {
+    // Could add animated increment logic here
+  }, []);
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar Navigation */}
@@ -27,20 +59,63 @@ export default function DashboardPage() {
         </header>
         {/* Dashboard Content */}
         <main className="flex-1 p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {/* Placeholder cards for metrics, charts, previews */}
-          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow">
+          {/* Live Metrics Cards */}
+          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow flex flex-col items-center">
             <h2 className="text-xl font-bold mb-2">Test Cases</h2>
-            <p className="text-gray-600">Total: 120</p>
+            <span className="text-4xl font-bold text-blue-600 animate-pulse">{metrics.testCases}</span>
           </div>
-          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow">
+          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow flex flex-col items-center">
             <h2 className="text-xl font-bold mb-2">Defects</h2>
-            <p className="text-gray-600">Open: 5 | Closed: 15</p>
+            <span className="text-4xl font-bold text-red-600 animate-pulse">{metrics.defectsOpen}</span>
+            <span className="text-sm text-gray-500">Open</span>
+            <span className="text-4xl font-bold text-green-600 animate-pulse mt-2">{metrics.defectsClosed}</span>
+            <span className="text-sm text-gray-500">Closed</span>
           </div>
-          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow">
+          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow flex flex-col items-center">
             <h2 className="text-xl font-bold mb-2">Test Runs</h2>
-            <p className="text-gray-600">Pass: 110 | Fail: 10</p>
+            <span className="text-4xl font-bold text-green-600 animate-pulse">{metrics.testRunsPass}</span>
+            <span className="text-sm text-gray-500">Pass</span>
+            <span className="text-4xl font-bold text-red-600 animate-pulse mt-2">{metrics.testRunsFail}</span>
+            <span className="text-sm text-gray-500">Fail</span>
           </div>
-          {/* Add more cards for charts, demo previews, etc. */}
+          {/* Charts */}
+          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow col-span-1 md:col-span-2 xl:col-span-3">
+            <h2 className="text-xl font-bold mb-4">Test Run Results (Weekly)</h2>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={testRunData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pass" fill="#22c55e" name="Pass" />
+                <Bar dataKey="fail" fill="#ef4444" name="Fail" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow col-span-1 md:col-span-2 xl:col-span-3">
+            <h2 className="text-xl font-bold mb-4">Defect Trends (Monthly)</h2>
+            <ResponsiveContainer width="100%" height={200}>
+              <AreaChart data={defectTrendData}>
+                <defs>
+                  <linearGradient id="colorOpen" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#ef4444" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorClosed" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#22c55e" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#22c55e" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" />
+                <Tooltip />
+                <Area type="monotone" dataKey="open" stroke="#ef4444" fillOpacity={1} fill="url(#colorOpen)" name="Open" />
+                <Area type="monotone" dataKey="closed" stroke="#22c55e" fillOpacity={1} fill="url(#colorClosed)" name="Closed" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
         </main>
         {/* Welcome Popup and Chatbot */}
         <WelcomePopup />
