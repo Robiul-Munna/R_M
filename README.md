@@ -1,4 +1,3 @@
-
 # AI QA Tool for Healthcare Applications
 
 ## Features
@@ -9,6 +8,9 @@
 - Test Case Management (TestRail integration ready)
 - Demo Hospital Workflow Pages
 - Sidebar Navigation
+- Welcome Popup (shows once per session)
+- Chatbot Widget (bottom-right)
+- Enhanced Landing Page (mobile responsive, shadcn/ui, Heroicons)
 - Sample Data Seeding
 - Reporting (charts, PDF export)
 
@@ -21,39 +23,44 @@ pnpm dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 2. Natural Language Test Mode
+### 2. Landing Page
+- The root route `/` displays a modern, mobile-responsive landing page.
+- Features quick links to all major sections and demo workflows.
+- Includes Welcome Popup and shadcn/ui buttons with Heroicons.
+
+### 3. Natural Language Test Mode
 - Go to **Test Cases** (/cases)
 - Enter a plain English test description
 - Click **Generate Test Steps**
 - View AI-generated steps and Playwright code
 - Save as TestRail test case (simulated)
 
-### 3. Coding Mode Editor
+### 4. Coding Mode Editor
 - Go to **Runs** (/runs)
 - Write or paste Playwright test code
 - Click **Run Playwright Test**
 - View results, log defects to Jira (simulated), save to TestRail
 
-### 4. Chatbot Assistant
+### 5. Chatbot Assistant
 - Click **Open Chatbot** (bottom-right)
 - Ask QA questions, generate tests, get edge cases, log defects
 
-### 5. Defect Logging
+### 6. Defect Logging
 - Go to **Defects** (/defects)
 - Submit defect details, severity, and steps
 - Simulates Jira issue creation
 
-### 6. Demo Hospital Workflow
+### 7. Demo Hospital Workflow
 - Use sidebar to access demo pages:
 	- Login, Patient Search, Medication Order, Document Upload, Scheduling
 - Test end-to-end QA scenarios
 
-### 7. Reporting
+### 8. Reporting
 - Go to **Reports** (/reports)
 - View summary charts, pass/fail stats, defect lists
 - Export PDF report
 
-### 8. Sample Data Seeding
+### 9. Sample Data Seeding
 - Demo data is auto-seeded via `/scripts/seedDemoData.ts`
 - For custom data, edit the script or use IndexedDB/localStorage
 
@@ -62,7 +69,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 2. Go to [vercel.com](https://vercel.com) and sign up (free tier)
 3. Import your GitHub repo in Vercel
 4. Set environment variables in Vercel dashboard (e.g., HF_API_KEY)
-5. Click **Deploy**
+5. Ensure only one Vercel project is connected to your repo's main branch
+6. Click **Deploy**
+7. Visit your live site (e.g., `https://robiul-munna.vercel.app/`) to see the landing page
 
 ## Advanced & Future Enhancements
 - Multi-user support (add authentication)
@@ -75,6 +84,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - If Playwright runner fails, check Node.js and Playwright install
 - For API errors, verify environment variables
 - For UI issues, check browser console for errors
+- If you see a 404, confirm the root route `/` exists as `app/page.tsx` and Vercel is connected to the correct repo/branch
 
 ## Security & Privacy
 - No PHI/PII stored
