@@ -30,6 +30,15 @@ const defectTrendData = [
   { name: "Week 4", open: 2, closed: 10 },
 ];
 
+// Demo App Preview Cards
+const demoApps = [
+  { name: "Login", href: "/demo-app/auth/login", color: "bg-blue-100", icon: UserIcon },
+  { name: "Patient Search", href: "/demo-app/patients/search", color: "bg-teal-100", icon: UserIcon },
+  { name: "Orders", href: "/demo-app/orders/medication", color: "bg-indigo-100", icon: UserIcon },
+  { name: "Upload", href: "/demo-app/documents/upload", color: "bg-pink-100", icon: UserIcon },
+  { name: "Scheduling", href: "/demo-app/scheduling", color: "bg-yellow-100", icon: UserIcon },
+];
+
 export default function DashboardPage() {
   const [metrics, setMetrics] = useState(sampleMetrics);
 
@@ -115,6 +124,26 @@ export default function DashboardPage() {
                 <Area type="monotone" dataKey="closed" stroke="#22c55e" fillOpacity={1} fill="url(#colorClosed)" name="Closed" />
               </AreaChart>
             </ResponsiveContainer>
+          </div>
+          {/* Demo App Previews */}
+          <div className="col-span-1 md:col-span-2 xl:col-span-3">
+            <h2 className="text-xl font-bold mb-4">Demo App Previews</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+              {demoApps.map(app => (
+                <a
+                  key={app.name}
+                  href={app.href}
+                  className={`block ${app.color} rounded-xl shadow p-4 hover:shadow-lg transition-shadow group`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="flex flex-col items-center justify-center">
+                    <app.icon className="h-8 w-8 text-blue-600 group-hover:scale-110 transition-transform mb-2" />
+                    <span className="font-semibold text-gray-700 group-hover:text-blue-700">{app.name}</span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </main>
         {/* Welcome Popup and Chatbot */}
