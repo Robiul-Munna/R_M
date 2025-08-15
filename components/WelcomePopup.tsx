@@ -22,9 +22,9 @@ export default function WelcomePopup() {
             Feel free to explore and look around. If you have any suggestions, please leave a note — it would be greatly appreciated.
             <br /><br />
             Mr. Robiul Munna is currently busy with another task. I’m his AI assistant, and if you work with me, I’ll do my best to help you get your task done.
-          <DialogDescription>
-            Feel free to explore and look around. If you have any suggestions, please leave a note — it would be greatly appreciated.
-            <br /><br />
-            Mr. Robiul Munna is currently busy with another task. I’m his AI assistant, and if you work with me, I’ll do my best to help you get your task done.
           </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  );
 }
