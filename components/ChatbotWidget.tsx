@@ -45,47 +45,37 @@ export default function ChatbotWidget() {
   );
 
   return (
-    <>
-      <button
-        className="fixed bottom-6 right-6 z-50 bg-blue-600 text-white px-4 py-2 rounded shadow-lg"
-        onClick={() => setOpen(o => !o)}
-      >
-        {open ? "Close Chat" : "Chat with Robiul Munna's Assistant"}
-      </button>
-      {open && (
-        <div className="fixed bottom-20 right-6 z-50 w-80 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex flex-col animate-fade-in">
-          <div className="p-4 border-b font-bold text-blue-700">Chat with Robiul Munna's Assistant</div>
-          <div className="flex-1 p-4 overflow-y-auto max-h-96">
-            {messages.map((msg, i) => (
-              <div key={i} className={msg.role === "user" ? "text-right mb-2" : "text-left mb-2 animate-chat-bubble"}>
-                <span className={msg.role === "user" ? "bg-blue-100 text-blue-800 px-2 py-1 rounded shadow-sm" : "bg-gray-100 text-gray-800 px-2 py-1 rounded shadow-sm"}>
-                  {msg.text}
-                </span>
-              </div>
-            ))}
-            {loading && <TypingIndicator />}
-            <div ref={chatEndRef} />
+    <div className="fixed bottom-6 right-6 z-50 w-80 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex flex-col animate-fade-in">
+      <div className="p-4 border-b font-bold text-blue-700">Chat with Robiul Munna's Assistant</div>
+      <div className="flex-1 p-4 overflow-y-auto max-h-96">
+        {messages.map((msg, i) => (
+          <div key={i} className={msg.role === "user" ? "text-right mb-2" : "text-left mb-2 animate-chat-bubble"}>
+            <span className={msg.role === "user" ? "bg-blue-100 text-blue-800 px-2 py-1 rounded shadow-sm" : "bg-gray-100 text-gray-800 px-2 py-1 rounded shadow-sm"}>
+              {msg.text}
+            </span>
           </div>
-          <div className="p-2 border-t flex bg-gray-50 rounded-b">
-            <input
-              className="flex-1 p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              type="text"
-              placeholder="Type your message..."
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && sendMessage()}
-              disabled={loading}
-            />
-            <button
-              className="ml-2 px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition-colors"
-              onClick={sendMessage}
-              disabled={loading}
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+        ))}
+        {loading && <TypingIndicator />}
+        <div ref={chatEndRef} />
+      </div>
+      <div className="p-2 border-t flex bg-gray-50 rounded-b">
+        <input
+          className="flex-1 p-2 border rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          type="text"
+          placeholder="Type your message..."
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && sendMessage()}
+          disabled={loading}
+        />
+        <button
+          className="ml-2 px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition-colors"
+          onClick={sendMessage}
+          disabled={loading}
+        >
+          Send
+        </button>
+      </div>
+    </div>
   );
 }
