@@ -7,6 +7,7 @@ import { UserIcon, BellIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
 import CodingModeEditor from "@/app/runs/CodingModeEditor";
+import { ClipboardDocumentListIcon, PencilSquareIcon, DocumentTextIcon, Cog6ToothIcon, PlayCircleIcon, BugAntIcon, MagnifyingGlassCircleIcon, ChartBarIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 const sampleMetrics = {
   testCases: 120,
@@ -38,6 +39,18 @@ const demoApps = [
   { name: "Orders", href: "/demo-app/orders/medication", color: "bg-indigo-100", icon: UserIcon },
   { name: "Upload", href: "/demo-app/documents/upload", color: "bg-pink-100", icon: UserIcon },
   { name: "Scheduling", href: "/demo-app/scheduling", color: "bg-yellow-100", icon: UserIcon },
+];
+
+const lifecycleStages = [
+  { name: "Requirements Analysis", icon: ClipboardDocumentListIcon, href: "/requirements" },
+  { name: "Test Planning", icon: PencilSquareIcon, href: "/plans" },
+  { name: "Test Case Design", icon: DocumentTextIcon, href: "/cases" },
+  { name: "Test Environment Setup", icon: Cog6ToothIcon, href: "/dashboard" },
+  { name: "Test Execution", icon: PlayCircleIcon, href: "/runs" },
+  { name: "Defect Logging", icon: BugAntIcon, href: "/defects" },
+  { name: "Defect Tracking", icon: MagnifyingGlassCircleIcon, href: "/defects" },
+  { name: "Test Reporting", icon: ChartBarIcon, href: "/reports" },
+  { name: "Test Closure", icon: CheckCircleIcon, href: "/dashboard" },
 ];
 
 export default function DashboardPage() {
@@ -150,6 +163,26 @@ export default function DashboardPage() {
           <div className="col-span-1 md:col-span-2 xl:col-span-3">
             <h2 className="text-xl font-bold mb-4">Coding Mode</h2>
             <CodingModeEditor />
+          </div>
+          {/* QA Lifecycle Progress Flow */}
+          <div className="col-span-1 md:col-span-2 xl:col-span-3 mb-8">
+            <h2 className="text-xl font-bold mb-4">QA Lifecycle</h2>
+            <div className="flex flex-row items-center justify-between gap-2 overflow-x-auto pb-2">
+              {lifecycleStages.map((stage, idx) => (
+                <a
+                  key={stage.name}
+                  href={stage.href}
+                  className={`flex flex-col items-center px-3 py-2 rounded-lg bg-white shadow hover:bg-blue-50 transition-colors group ${idx === 0 ? 'border-blue-600 border-2' : 'border border-gray-200'}`}
+                  style={{ minWidth: 120 }}
+                >
+                  <stage.icon className="h-6 w-6 text-blue-600 mb-1 group-hover:scale-110 transition-transform" />
+                  <span className="text-xs font-semibold text-gray-700 group-hover:text-blue-700 text-center">{stage.name}</span>
+                  {idx < lifecycleStages.length - 1 && (
+                    <span className="w-8 h-1 bg-blue-300 rounded-full mt-2 mx-auto" />
+                  )}
+                </a>
+              ))}
+            </div>
           </div>
         </main>
         {/* Welcome Popup and Chatbot */}
