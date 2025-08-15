@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@monaco-editor/react": "^4.7.0",
     "autoprefixer": "^10.4.21",
     "idb": "^8.0.3",
