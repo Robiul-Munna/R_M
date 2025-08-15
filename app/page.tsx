@@ -23,22 +23,22 @@ export default function HomePage() {
 
       {/* Navigation Buttons - major sections */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-2xl mb-8">
-        <Link href="/cases" passHref legacyBehavior>
+  <Link href="/cases">
           <Button className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-lg py-4" aria-label="Test Cases">
             <ClipboardDocumentCheckIcon className="h-6 w-6" /> Test Cases
           </Button>
         </Link>
-        <Link href="/runs" passHref legacyBehavior>
+  <Link href="/runs">
           <Button className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-lg py-4" aria-label="Coding Mode">
             <UserIcon className="h-6 w-6" /> Coding Mode
           </Button>
         </Link>
-        <Link href="/defects" passHref legacyBehavior>
+  <Link href="/defects">
           <Button className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-lg py-4" aria-label="Defects">
             <BugAntIcon className="h-6 w-6" /> Defects
           </Button>
         </Link>
-        <Link href="/reports" passHref legacyBehavior>
+  <Link href="/reports">
           <Button className="w-full flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white text-lg py-4" aria-label="Reports">
             <ChartBarIcon className="h-6 w-6" /> Reports
           </Button>
@@ -47,22 +47,22 @@ export default function HomePage() {
 
       {/* Demo app quick links */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-2xl">
-        <Link href="/patients" passHref legacyBehavior>
+  <Link href="/patients">
           <Button className="w-full flex items-center justify-center gap-2 bg-yellow-600 hover:bg-yellow-700 text-white text-lg py-4" aria-label="Patients">
             <UsersIcon className="h-6 w-6" /> Patients
           </Button>
         </Link>
-        <Link href="/orders" passHref legacyBehavior>
+  <Link href="/orders">
           <Button className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-lg py-4" aria-label="Orders">
             <ShoppingBagIcon className="h-6 w-6" /> Orders
           </Button>
         </Link>
-        <Link href="/upload" passHref legacyBehavior>
+  <Link href="/upload">
           <Button className="w-full flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white text-lg py-4" aria-label="Upload Docs">
             <DocumentArrowUpIcon className="h-6 w-6" /> Upload Docs
           </Button>
         </Link>
-        <Link href="/scheduling" passHref legacyBehavior>
+  <Link href="/scheduling">
           <Button className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-lg py-4" aria-label="Scheduling">
             <CalendarDaysIcon className="h-6 w-6" /> Scheduling
           </Button>
