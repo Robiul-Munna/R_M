@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { UserIcon, BellIcon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
+import CodingModeEditor from "@/app/runs/CodingModeEditor";
 
 const sampleMetrics = {
   testCases: 120,
@@ -144,6 +145,11 @@ export default function DashboardPage() {
                 </a>
               ))}
             </div>
+          </div>
+          {/* Coding Mode Editor */}
+          <div className="col-span-1 md:col-span-2 xl:col-span-3">
+            <h2 className="text-xl font-bold mb-4">Coding Mode</h2>
+            <CodingModeEditor />
           </div>
         </main>
         {/* Welcome Popup and Chatbot */}
