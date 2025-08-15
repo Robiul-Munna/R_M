@@ -8,6 +8,11 @@ import { useEffect, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from "recharts";
 import CodingModeEditor from "@/app/runs/CodingModeEditor";
 import { ClipboardDocumentListIcon, PencilSquareIcon, DocumentTextIcon, Cog6ToothIcon, PlayCircleIcon, BugAntIcon, MagnifyingGlassCircleIcon, ChartBarIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import { HospitalWorkflowSVG } from "@/components/svg/HospitalWorkflowSVG";
+import { PatientWorkflowSVG } from "@/components/svg/PatientWorkflowSVG";
+import { MedicationWorkflowSVG } from "@/components/svg/MedicationWorkflowSVG";
+import { SchedulingWorkflowSVG } from "@/components/svg/SchedulingWorkflowSVG";
+import { LabWorkflowSVG } from "@/components/svg/LabWorkflowSVG";
 
 const sampleMetrics = {
   testCases: 120,
@@ -81,24 +86,24 @@ export default function DashboardPage() {
           </div>
         </header>
         {/* Dashboard Content */}
-        <main className="flex-1 p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <main className="flex-1 p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 bg-gradient-to-br from-blue-50 via-white to-indigo-100">
           {/* Live Metrics Cards */}
-          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-2">Test Cases</h2>
-            <span className="text-4xl font-bold text-blue-600 animate-pulse">{metrics.testCases}</span>
+          <div className="rounded-2xl shadow-xl p-6 flex flex-col items-center bg-white/80 backdrop-blur-md border border-blue-100 hover:shadow-2xl transition-shadow">
+            <h2 className="text-xl font-bold mb-2 text-blue-700">Test Cases</h2>
+            <span className="text-4xl font-bold text-blue-600 animate-pulse drop-shadow-lg">{metrics.testCases}</span>
           </div>
-          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-2">Defects</h2>
-            <span className="text-4xl font-bold text-red-600 animate-pulse">{metrics.defectsOpen}</span>
+          <div className="rounded-2xl shadow-xl p-6 flex flex-col items-center bg-white/80 backdrop-blur-md border border-red-100 hover:shadow-2xl transition-shadow">
+            <h2 className="text-xl font-bold mb-2 text-red-700">Defects</h2>
+            <span className="text-4xl font-bold text-red-600 animate-pulse drop-shadow-lg">{metrics.defectsOpen}</span>
             <span className="text-sm text-gray-500">Open</span>
-            <span className="text-4xl font-bold text-green-600 animate-pulse mt-2">{metrics.defectsClosed}</span>
+            <span className="text-4xl font-bold text-green-600 animate-pulse mt-2 drop-shadow-lg">{metrics.defectsClosed}</span>
             <span className="text-sm text-gray-500">Closed</span>
           </div>
-          <div className="bg-white rounded-xl shadow p-6 hover:shadow-lg transition-shadow flex flex-col items-center">
-            <h2 className="text-xl font-bold mb-2">Test Runs</h2>
-            <span className="text-4xl font-bold text-green-600 animate-pulse">{metrics.testRunsPass}</span>
+          <div className="rounded-2xl shadow-xl p-6 flex flex-col items-center bg-white/80 backdrop-blur-md border border-green-100 hover:shadow-2xl transition-shadow">
+            <h2 className="text-xl font-bold mb-2 text-green-700">Test Runs</h2>
+            <span className="text-4xl font-bold text-green-600 animate-pulse drop-shadow-lg">{metrics.testRunsPass}</span>
             <span className="text-sm text-gray-500">Pass</span>
-            <span className="text-4xl font-bold text-red-600 animate-pulse mt-2">{metrics.testRunsFail}</span>
+            <span className="text-4xl font-bold text-red-600 animate-pulse mt-2 drop-shadow-lg">{metrics.testRunsFail}</span>
             <span className="text-sm text-gray-500">Fail</span>
           </div>
           {/* Charts */}
@@ -139,24 +144,30 @@ export default function DashboardPage() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          {/* Demo App Previews */}
+          {/* Demo App Previews with SVGs */}
           <div className="col-span-1 md:col-span-2 xl:col-span-3">
             <h2 className="text-xl font-bold mb-4">Demo App Previews</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-              {demoApps.map(app => (
-                <a
-                  key={app.name}
-                  href={app.href}
-                  className={`block ${app.color} rounded-xl shadow p-4 hover:shadow-lg transition-shadow group`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="flex flex-col items-center justify-center">
-                    <app.icon className="h-8 w-8 text-blue-600 group-hover:scale-110 transition-transform mb-2" />
-                    <span className="font-semibold text-gray-700 group-hover:text-blue-700">{app.name}</span>
-                  </div>
-                </a>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+              <div className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center hover:shadow-2xl transition-shadow">
+                <HospitalWorkflowSVG className="w-32 h-20 mb-2" />
+                <span className="font-semibold text-gray-700 mt-2">Hospital Workflow</span>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center hover:shadow-2xl transition-shadow">
+                <PatientWorkflowSVG className="w-32 h-20 mb-2" />
+                <span className="font-semibold text-gray-700 mt-2">Patient Workflow</span>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center hover:shadow-2xl transition-shadow">
+                <MedicationWorkflowSVG className="w-32 h-20 mb-2" />
+                <span className="font-semibold text-gray-700 mt-2">Medication Workflow</span>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center hover:shadow-2xl transition-shadow">
+                <SchedulingWorkflowSVG className="w-32 h-20 mb-2" />
+                <span className="font-semibold text-gray-700 mt-2">Scheduling Workflow</span>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center hover:shadow-2xl transition-shadow">
+                <LabWorkflowSVG className="w-32 h-20 mb-2" />
+                <span className="font-semibold text-gray-700 mt-2">Lab/Test Workflow</span>
+              </div>
             </div>
           </div>
           {/* Coding Mode Editor */}
