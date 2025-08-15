@@ -23,6 +23,7 @@ export default function CodingModeEditor() {
   const [error, setError] = useState("");
   const [jiraStatus, setJiraStatus] = useState("");
   const [testrailStatus, setTestRailStatus] = useState("");
+  const [history, setHistory] = useState<{ code: string; result: string; date: string }[]>([]);
   const resultRef = useRef<HTMLDivElement>(null);
 
   async function handleRun() {
@@ -40,6 +41,10 @@ export default function CodingModeEditor() {
       const data = await res.json();
       if (data.result) {
         setResult(data.result);
+        setHistory(h => [
+          { code, result: data.result, date: new Date().toLocaleString() },
+          ...h.slice(0, 9)
+        ]);
         // Simulate defect logging if test fails
         if (/FAIL|Error|failed|not found/i.test(data.result)) {
           const jiraRes = await createJiraIssue({
@@ -78,7 +83,7 @@ export default function CodingModeEditor() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow">
+    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded shadow animate-fade-in">
       <h1 className="text-2xl font-bold mb-4">Coding Mode: Playwright Editor</h1>
       <Editor
         height="400px"
@@ -89,30 +94,45 @@ export default function CodingModeEditor() {
         options={{ fontSize: 16 }}
       />
       <button
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
         onClick={handleRun}
         disabled={loading}
       >
         {loading ? "Running..." : "Run Playwright Test"}
       </button>
-      {error && <div className="text-red-500 mt-2">{error}</div>}
+      {error && <div className="text-red-500 mt-2 animate-pulse">{error}</div>}
       {result && (
-        <div ref={resultRef} className="bg-gray-100 p-4 rounded mt-4 whitespace-pre-wrap">
+        <div ref={resultRef} className="bg-gray-100 p-4 rounded mt-4 whitespace-pre-wrap animate-fade-in">
           <strong>Test Result:</strong>
           <div>{result}</div>
-          {jiraStatus && <div className="mt-2 text-green-600">{jiraStatus}</div>}
+          {jiraStatus && <div className="mt-2 text-green-600 animate-pulse">{jiraStatus}</div>}
         </div>
       )}
       {result && (
         <button
-          className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
+          className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
           onClick={handleSaveTestCase}
           disabled={loading}
         >
           Save Test Case to TestRail
         </button>
       )}
-      {testrailStatus && <div className="mt-2 text-green-600">{testrailStatus}</div>}
+      {testrailStatus && <div className="mt-2 text-green-600 animate-pulse">{testrailStatus}</div>}
+      {/* Test Execution History */}
+      {history.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-lg font-bold mb-2">Test Execution History</h2>
+          <ul className="space-y-2">
+            {history.map((h, i) => (
+              <li key={i} className="bg-white border rounded p-2 shadow-sm">
+                <div className="text-xs text-gray-500">{h.date}</div>
+                <div className="font-mono text-xs text-blue-700">{h.code.slice(0, 60)}...</div>
+                <div className={/PASS|Success/i.test(h.result) ? "text-green-600" : "text-red-600"}>{h.result.slice(0, 80)}...</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

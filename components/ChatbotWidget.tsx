@@ -34,6 +34,16 @@ export default function ChatbotWidget() {
     }
   }
 
+  // Add typing indicator and chat bubble animation
+  const TypingIndicator = () => (
+    <div className="flex items-center gap-1 mt-2 animate-pulse">
+      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+      <span className="text-xs text-blue-600 ml-2">AI is typing...</span>
+    </div>
+  );
+
   return (
     <>
       <button
@@ -43,16 +53,17 @@ export default function ChatbotWidget() {
         {open ? "Close Chatbot" : "Open Chatbot"}
       </button>
       {open && (
-        <div className="fixed bottom-20 right-6 z-50 w-80 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex flex-col">
+        <div className="fixed bottom-20 right-6 z-50 w-80 bg-white dark:bg-gray-900 rounded-lg shadow-lg flex flex-col animate-fade-in">
           <div className="p-4 border-b font-bold text-blue-700">AI QA Assistant</div>
           <div className="flex-1 p-4 overflow-y-auto max-h-96">
             {messages.map((msg, i) => (
-              <div key={i} className={msg.role === "user" ? "text-right mb-2" : "text-left mb-2"}>
-                <span className={msg.role === "user" ? "bg-blue-100 text-blue-800 px-2 py-1 rounded" : "bg-gray-100 text-gray-800 px-2 py-1 rounded"}>
+              <div key={i} className={msg.role === "user" ? "text-right mb-2" : "text-left mb-2 animate-chat-bubble"}>
+                <span className={msg.role === "user" ? "bg-blue-100 text-blue-800 px-2 py-1 rounded shadow-sm" : "bg-gray-100 text-gray-800 px-2 py-1 rounded shadow-sm"}>
                   {msg.text}
                 </span>
               </div>
             ))}
+            {loading && <TypingIndicator />}
             <div ref={chatEndRef} />
           </div>
           <div className="p-2 border-t flex">
@@ -66,7 +77,7 @@ export default function ChatbotWidget() {
               disabled={loading}
             />
             <button
-              className="ml-2 px-4 py-2 bg-blue-600 text-white rounded"
+              className="ml-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
               onClick={sendMessage}
               disabled={loading}
             >
